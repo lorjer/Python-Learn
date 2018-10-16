@@ -10,8 +10,9 @@ user = 'steven.liu';
 pwd = 'moremoney';
 
 #local directory
+LocalSourcePath = 'E:\Github\Testsource';
 CurAbsPath = os.path.abspath('.');
-SourcePath = CurAbsPath + '\copyfiletest1';
+SourcePath = LocalSourcePath + '\copyfiletest1';
 SourceFileNames = os.listdir(SourcePath);
 print("SourcePath path is:",SourcePath);
 print("SourceFileNames is:",SourceFileNames);
