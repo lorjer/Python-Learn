@@ -1,6 +1,7 @@
 import os
 from ftplib import FTP
 import time
+import filetype
 
 ftp = FTP();
 ftp_ip = '192.168.80.219';
@@ -42,7 +43,7 @@ def ftp_disconnect():
     ftp.close();
     print("FTP disconnect ok");
     
-#md new directory, use current timestamp as name,return 
+#md new directory, use current timestamp as name,return new path
 def ftp_mdnewdir1(currentdir):
     ftp.cwd(currentdir);
     curtimestamp = GetNowTimeStamp();
@@ -54,9 +55,7 @@ def ftp_mdnewdir1(currentdir):
         return currentdir + '/' + curtimestamp ;
     
 #md new directory, if not exist, then create a new one 
-#def ftp_mdnewdir2(sourcedir):   
-    
-    
+#def ftp_mdnewdir2(sourcedir):      
 def ftp_uploadfile(localfile,targetfile):
     if os.path.isfile(localfile) == False:
         return False;
@@ -82,12 +81,15 @@ def ftp_uploadtree(localpath,targetpath):
             ftp_uploadfile(src,opfile);
     ftp.cwd('..');
     return;
-    
-ftp_connect();
-#ftp.cwd(TargetPath);
-#ftp_uploadfile('kpi.xlsx','kpi.xlsx');
-#ftp_uploadtree(SourcePath,TargetPath);
-ftp_uploadtree(SourcePath,ftp_mdnewdir1(TargetPath));
 
-ftp.dir();
-ftp_disconnect();
+def main():
+    ftp_connect();
+    #ftp.cwd(TargetPath);
+    #ftp_uploadfile('kpi.xlsx','kpi.xlsx');
+    #ftp_uploadtree(SourcePath,TargetPath);
+    #ftp_uploadtree(SourcePath,ftp_mdnewdir1(TargetPath));
+    ftp.dir();
+    ftp_disconnect(); 
+    
+if __name__ == '__main__':
+    main();
